@@ -140,18 +140,18 @@ export function addNewQuestion(
     name: string,
     type: QuestionType,
 ): Question[] {
-    return [];
-    /*
     const emptyQ = {
         id,
         name,
         type,
+        body: "",
+        expected: "",
         options: [],
-        points: 0,
+        points: 1,
         published: false,
     };
     return [...questions, emptyQ];
-    */
+    //hello
 }
 
 /***
@@ -244,14 +244,17 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number,
 ): Question[] {
-    return [];
-    /*
+    let ind = questions.findIndex((question) => question.id === targetId);
 
-    const indices = questions.findIndex(question) => question.id === targetId);
-    return indices === -1 ? questions : {
-        [
-            ...questions.slice(0, indices + 1),
-        ]
-    }
-    */
+    return ind === -1 ? questions : (
+            [
+                ...questions.slice(0, ind + 1),
+                {
+                    ...questions[ind],
+                    id: newId,
+                    name: `Copy of ${questions[ind].name}`,
+                },
+                ...questions.slice(ind + 1),
+            ]
+        );
 }
